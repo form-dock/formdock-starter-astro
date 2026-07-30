@@ -1,0 +1,32 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Thanks" description="Message received.">
+  <main>
+    <section class="thanks">
+      <div class="check">✓</div>
+      <h1>Thanks — your message was sent.</h1>
+      <p>We'll get back to you within one business day.</p>
+      <a href="/">← Back to the site</a>
+    </section>
+  </main>
+</Base>
+
+<style>
+  .thanks {
+    text-align: center;
+    padding: 6rem 0;
+  }
+  .check {
+    font-size: 2.5rem;
+    color: var(--accent);
+  }
+  .thanks h1 {
+    font-size: 1.6rem;
+    margin: 0.5rem 0;
+  }
+  .thanks p {
+    color: var(--muted);
+  }
+</style>

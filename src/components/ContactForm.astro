@@ -1,0 +1,95 @@
+---
+// The FormDock-wired contact form. No JavaScript, no backend — the form
+// posts straight to your FormDock endpoint (set it in src/config.ts).
+// Submissions are spam-filtered, stored, and emailed to your recipients.
+import { FORMDOCK_ENDPOINT } from "../config";
+---
+
+<form class="contact-form" action={FORMDOCK_ENDPOINT} method="POST">
+  <label>
+    Name
+    <input type="text" name="name" required autocomplete="name" />
+  </label>
+  <label>
+    Email
+    <input type="email" name="email" required autocomplete="email" />
+  </label>
+  <label>
+    Message
+    <textarea name="message" rows="6" required></textarea>
+  </label>
+
+  <!-- Honeypot: bots fill this hidden field and get flagged as spam.
+       Keep it hidden and empty — real visitors never see it. -->
+  <input
+    type="text"
+    name="_gotcha"
+    class="hp"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+
+  <button type="submit">Send message</button>
+
+  <p class="note">
+    After submitting you'll land on a thanks page. Tip: in your FormDock form
+    settings, set the redirect URL to <code>https://your-site.com/thanks</code>
+    to use this site's own thanks page.
+  </p>
+</form>
+
+<style>
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+    max-width: 28rem;
+  }
+  label {
+    display: grid;
+    gap: 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+  input,
+  textarea {
+    font: inherit;
+    font-weight: 400;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--line);
+    border-radius: 0.5rem;
+    background: var(--panel);
+    color: var(--ink);
+  }
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+    border-color: transparent;
+  }
+  .hp {
+    display: none;
+  }
+  button {
+    font: inherit;
+    font-weight: 600;
+    padding: 0.7rem 1.2rem;
+    border: 0;
+    border-radius: 0.5rem;
+    background: var(--accent);
+    color: var(--accent-ink);
+    cursor: pointer;
+    justify-self: start;
+  }
+  button:hover {
+    filter: brightness(1.08);
+  }
+  .note {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin: 0;
+  }
+  .note code {
+    font-size: 0.75rem;
+  }
+</style>

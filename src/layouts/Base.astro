@@ -1,0 +1,138 @@
+---
+import { SITE_NAME, SITE_TAGLINE } from "../config";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const { title = SITE_NAME, description = SITE_TAGLINE } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+  </head>
+  <body>
+    <header class="site-header">
+      <a href="/" class="brand">{SITE_NAME}</a>
+      <nav>
+        <a href="/#work">Work</a>
+        <a href="/#services">Services</a>
+        <a href="/contact" class="cta">Get in touch</a>
+      </nav>
+    </header>
+
+    <slot />
+
+    <footer class="site-footer">
+      <span>© {new Date().getFullYear()} {SITE_NAME}</span>
+      <span class="powered">
+        Forms by <a href="https://formdock.app">FormDock</a>
+      </span>
+    </footer>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #ffffff;
+    --ink: #16161a;
+    --muted: #6b6b76;
+    --line: #e6e6ea;
+    --accent: #0f766e;
+    --accent-ink: #ffffff;
+    --panel: #f7f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #101014;
+      --ink: #ececf1;
+      --muted: #9a9aa5;
+      --line: #26262c;
+      --accent: #2dd4bf;
+      --accent-ink: #0c1211;
+      --panel: #17171c;
+    }
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+    display: flex;
+    min-height: 100dvh;
+    flex-direction: column;
+  }
+  a {
+    color: inherit;
+  }
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 60rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.1rem 1.5rem;
+  }
+  .brand {
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+  .site-header nav {
+    display: flex;
+    gap: 1.1rem;
+    align-items: center;
+    font-size: 0.95rem;
+  }
+  .site-header nav a {
+    text-decoration: none;
+    color: var(--muted);
+  }
+  .site-header nav a:hover {
+    color: var(--ink);
+  }
+  .site-header nav a.cta {
+    color: var(--accent-ink);
+    background: var(--accent);
+    padding: 0.45rem 0.9rem;
+    border-radius: 0.5rem;
+    font-weight: 600;
+  }
+  main {
+    flex: 1;
+    width: 100%;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  .site-footer {
+    border-top: 1px solid var(--line);
+    margin-top: 4rem;
+    padding: 1.5rem;
+    max-width: 60rem;
+    width: 100%;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+  .site-footer a {
+    color: var(--muted);
+  }
+</style>

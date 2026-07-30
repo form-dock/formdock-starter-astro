@@ -1,0 +1,33 @@
+---
+import Base from "../layouts/Base.astro";
+import ContactForm from "../components/ContactForm.astro";
+---
+
+<Base title="Contact" description="Tell us about your project.">
+  <main>
+    <section class="contact">
+      <h1>Get in touch</h1>
+      <p class="lede">
+        Tell us about your project — timeline, budget, and what success looks
+        like. We reply within one business day.
+      </p>
+      <ContactForm />
+    </section>
+  </main>
+</Base>
+
+<style>
+  .contact {
+    padding: 3.5rem 0 1rem;
+  }
+  .contact h1 {
+    font-size: 2rem;
+    letter-spacing: -0.02em;
+    margin: 0 0 0.5rem;
+  }
+  .lede {
+    color: var(--muted);
+    max-width: 34rem;
+    margin: 0 0 2rem;
+  }
+</style>
