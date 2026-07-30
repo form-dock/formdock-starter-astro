@@ -8,15 +8,25 @@ import { FORMDOCK_ENDPOINT } from "../config";
 <form class="contact-form" action={FORMDOCK_ENDPOINT} method="POST">
   <label>
     Name
-    <input type="text" name="name" required autocomplete="name" />
+    <input type="text" name="name" required autocomplete="name" placeholder="Jane Doe" />
   </label>
   <label>
     Email
-    <input type="email" name="email" required autocomplete="email" />
+    <input
+      type="email"
+      name="email"
+      required
+      autocomplete="email"
+      placeholder="jane@company.com"
+    />
   </label>
   <label>
     Message
-    <textarea name="message" rows="6" required></textarea>
+    <textarea
+      name="message"
+      rows="6"
+      required
+      placeholder="What are you building, and when does it need to exist?"></textarea>
   </label>
 
   <!-- Honeypot: bots fill this hidden field and get flagged as spam.
@@ -30,42 +40,41 @@ import { FORMDOCK_ENDPOINT } from "../config";
     aria-hidden="true"
   />
 
-  <button type="submit">Send message</button>
-
-  <p class="note">
-    After submitting you'll land on a thanks page. Tip: in your FormDock form
-    settings, set the redirect URL to <code>https://your-site.com/thanks</code>
-    to use this site's own thanks page.
-  </p>
+  <button type="submit">Send message →</button>
 </form>
 
 <style>
   .contact-form {
     display: grid;
-    gap: 1rem;
-    max-width: 28rem;
+    gap: 1.1rem;
   }
   label {
     display: grid;
-    gap: 0.35rem;
-    font-size: 0.9rem;
+    gap: 0.4rem;
+    font-size: 0.88rem;
     font-weight: 600;
   }
   input,
   textarea {
     font: inherit;
     font-weight: 400;
-    padding: 0.6rem 0.75rem;
+    padding: 0.7rem 0.9rem;
     border: 1px solid var(--line);
-    border-radius: 0.5rem;
-    background: var(--panel);
+    border-radius: 0.65rem;
+    background: var(--bg);
     color: var(--ink);
+    transition: border-color 120ms ease, box-shadow 120ms ease;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted);
+    opacity: 0.7;
   }
   input:focus,
   textarea:focus {
-    outline: 2px solid var(--accent);
-    outline-offset: 1px;
-    border-color: transparent;
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
   }
   .hp {
     display: none;
@@ -73,23 +82,17 @@ import { FORMDOCK_ENDPOINT } from "../config";
   button {
     font: inherit;
     font-weight: 600;
-    padding: 0.7rem 1.2rem;
+    padding: 0.85rem 1.4rem;
     border: 0;
-    border-radius: 0.5rem;
+    border-radius: 999px;
     background: var(--accent);
     color: var(--accent-ink);
     cursor: pointer;
     justify-self: start;
+    transition: transform 120ms ease, filter 120ms ease;
   }
   button:hover {
-    filter: brightness(1.08);
-  }
-  .note {
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin: 0;
-  }
-  .note code {
-    font-size: 0.75rem;
+    filter: brightness(1.06);
+    transform: translateY(-1px);
   }
 </style>

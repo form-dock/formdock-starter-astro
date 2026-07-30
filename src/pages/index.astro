@@ -1,57 +1,108 @@
 ---
 import Base from "../layouts/Base.astro";
-import { SITE_NAME, SITE_TAGLINE } from "../config";
+import { SITE_TAGLINE } from "../config";
+
+const projects = [
+  {
+    name: "Alpenrose Hotel",
+    outcome: "A booking-first redesign that lifted direct reservations 40%.",
+    tag: "Hospitality",
+  },
+  {
+    name: "Verde Coffee",
+    outcome: "Brand refresh and a webshop that ships 300 orders a month.",
+    tag: "Retail",
+  },
+  {
+    name: "Atlas Physio",
+    outcome: "A calm, fast site with patient intake people actually finish.",
+    tag: "Health",
+  },
+];
+
+const services = [
+  {
+    name: "Brand & identity",
+    desc: "Naming, logo, and a visual system that survives contact with real content.",
+  },
+  {
+    name: "Design & build",
+    desc: "Fast, accessible websites — designed and shipped by the same hands.",
+  },
+  {
+    name: "Ongoing care",
+    desc: "Updates, monitoring, and a human who answers within a business day.",
+  },
+];
 ---
 
 <Base>
   <main>
     <section class="hero">
-      <h1>{SITE_TAGLINE}</h1>
-      <p>
-        This is a one-page starter for a freelancer or small studio: fast,
-        accessible, zero JavaScript — with a working contact form powered by
-        FormDock. Replace this copy with your own story.
-      </p>
-      <a class="button" href="/contact">Start a project →</a>
+      <p class="kicker">Independent design studio</p>
+      <h1>
+        Websites with <em>craft</em>,<br />for businesses with character.
+      </h1>
+      <p class="lede">{SITE_TAGLINE}</p>
+      <div class="hero-actions">
+        <a class="button" href="/contact">Start a project</a>
+        <a class="ghost" href="#work">See the work ↓</a>
+      </div>
+      <p class="badge"><span class="dot"></span> Taking on two projects this autumn</p>
     </section>
 
-    <section id="work" class="cards">
-      <h2>Selected work</h2>
+    <section id="work" class="work reveal">
+      <div class="section-head">
+        <h2>Selected work</h2>
+        <p>Outcomes, not deliverables.</p>
+      </div>
       <div class="grid">
-        <article>
-          <h3>Project one</h3>
-          <p>A sentence about the outcome you delivered — not the tools.</p>
-        </article>
-        <article>
-          <h3>Project two</h3>
-          <p>What changed for the client after you shipped it.</p>
-        </article>
-        <article>
-          <h3>Project three</h3>
-          <p>Keep these short; link out to case studies if you have them.</p>
-        </article>
+        {
+          projects.map((p, i) => (
+            <article class="card">
+              <div class={`cover cover-${i + 1}`} aria-hidden="true" />
+              <div class="card-body">
+                <div class="card-top">
+                  <h3>{p.name}</h3>
+                  <span class="tag">{p.tag}</span>
+                </div>
+                <p>{p.outcome}</p>
+              </div>
+            </article>
+          ))
+        }
       </div>
     </section>
 
-    <section id="services" class="cards">
-      <h2>Services</h2>
-      <div class="grid">
-        <article>
-          <h3>Design</h3>
-          <p>Branding, sites, product UI.</p>
-        </article>
-        <article>
-          <h3>Development</h3>
-          <p>Fast, maintainable builds on modern tooling.</p>
-        </article>
-        <article>
-          <h3>Ongoing care</h3>
-          <p>Updates, monitoring, and a human who answers.</p>
-        </article>
+    <section id="services" class="services reveal">
+      <div class="section-head">
+        <h2>What we do</h2>
+        <p>Three things, done properly.</p>
+      </div>
+      <div class="rows">
+        {
+          services.map((s, i) => (
+            <div class="row">
+              <span class="num">0{i + 1}</span>
+              <div>
+                <h3>{s.name}</h3>
+                <p>{s.desc}</p>
+              </div>
+            </div>
+          ))
+        }
       </div>
     </section>
 
-    <section class="closer">
+    <section class="quote reveal">
+      <blockquote>
+        “They treated our little shop like it was a flagship. The site paid
+        for itself in a season.”
+      </blockquote>
+      <p class="attrib">— Elena M., Verde Coffee</p>
+    </section>
+
+    <section class="closer reveal">
       <h2>Have a project in mind?</h2>
       <p>Tell us about it — we reply within one business day.</p>
       <a class="button" href="/contact">Get in touch</a>
@@ -60,20 +111,37 @@ import { SITE_NAME, SITE_TAGLINE } from "../config";
 </Base>
 
 <style>
-  .hero {
-    padding: 4.5rem 0 3rem;
-    max-width: 38rem;
-  }
-  .hero h1 {
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+  .kicker {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
     margin: 0 0 1rem;
   }
-  .hero p {
+  .hero {
+    padding: 5rem 0 4rem;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.08;
+    margin: 0 0 1.25rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+  .lede {
     color: var(--muted);
-    font-size: 1.1rem;
-    margin: 0 0 1.75rem;
+    font-size: 1.15rem;
+    max-width: 34rem;
+    margin: 0 0 2rem;
+  }
+  .hero-actions {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+    flex-wrap: wrap;
   }
   .button {
     display: inline-block;
@@ -81,43 +149,200 @@ import { SITE_NAME, SITE_TAGLINE } from "../config";
     color: var(--accent-ink);
     font-weight: 600;
     text-decoration: none;
-    padding: 0.7rem 1.2rem;
-    border-radius: 0.5rem;
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    transition: transform 120ms ease, filter 120ms ease;
   }
-  .cards {
-    padding: 2rem 0;
+  .button:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
   }
-  .cards h2,
-  .closer h2 {
-    font-size: 1.4rem;
-    letter-spacing: -0.01em;
+  .ghost {
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .ghost:hover {
+    color: var(--ink);
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2.25rem;
+    font-size: 0.85rem;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    padding: 0.4rem 0.9rem;
+    border-radius: 999px;
+    background: var(--panel);
+  }
+  .dot {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2.4s ease-in-out infinite;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .dot {
+      animation: none;
+    }
+  }
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+  }
+  .section-head h2 {
+    font-size: 1.9rem;
+    margin: 0;
+  }
+  .section-head p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.95rem;
+  }
+
+  .work {
+    padding: 3rem 0;
   }
   .grid {
     display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+    gap: 1.25rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
   }
-  .grid article {
-    border: 1px solid var(--line);
-    border-radius: 0.75rem;
-    padding: 1.1rem 1.25rem;
+  .card {
     background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 1rem;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 160ms ease, box-shadow 160ms ease;
   }
-  .grid h3 {
-    margin: 0 0 0.4rem;
-    font-size: 1.02rem;
+  .card:hover {
+    transform: translateY(-4px);
   }
-  .grid p {
+  .cover {
+    aspect-ratio: 16 / 10;
+  }
+  .cover-1 {
+    background: linear-gradient(135deg, #f2c9a8, #b4530a 65%, #6d2f08);
+  }
+  .cover-2 {
+    background: linear-gradient(135deg, #cfe3c0, #4d7c3f 60%, #23431c);
+  }
+  .cover-3 {
+    background: linear-gradient(135deg, #bcd7e8, #3b6f92 60%, #1d3a50);
+  }
+  .card-body {
+    padding: 1.1rem 1.25rem 1.3rem;
+  }
+  .card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+  .card h3 {
+    margin: 0;
+    font-size: 1.15rem;
+  }
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+  .card p {
+    margin: 0.5rem 0 0;
+    color: var(--muted);
+    font-size: 0.93rem;
+  }
+
+  .services {
+    padding: 3rem 0;
+  }
+  .rows {
+    border-top: 1px solid var(--line);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 4.5rem 1fr;
+    gap: 1rem;
+    padding: 1.6rem 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .num {
+    font-family: ui-serif, Georgia, serif;
+    font-size: 1.6rem;
+    color: var(--line);
+    font-weight: 600;
+    line-height: 1;
+    transition: color 160ms ease;
+  }
+  .row:hover .num {
+    color: var(--accent);
+  }
+  .row h3 {
+    margin: 0 0 0.3rem;
+    font-size: 1.15rem;
+  }
+  .row p {
     margin: 0;
     color: var(--muted);
-    font-size: 0.92rem;
+    font-size: 0.95rem;
+    max-width: 38rem;
   }
-  .closer {
+
+  .quote {
+    padding: 4rem 0 2rem;
     text-align: center;
-    padding: 3.5rem 0 1rem;
+  }
+  blockquote {
+    font-size: clamp(1.3rem, 3vw, 1.7rem);
+    font-style: italic;
+    max-width: 38rem;
+    margin: 0 auto;
+    line-height: 1.45;
+  }
+  .attrib {
+    color: var(--muted);
+    margin-top: 1rem;
+    font-size: 0.9rem;
+  }
+
+  .closer {
+    margin-top: 4rem;
+    text-align: center;
+    background: var(--panel-soft);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 3rem 1.5rem;
+  }
+  .closer h2 {
+    font-size: 1.9rem;
+    margin: 0 0 0.4rem;
   }
   .closer p {
     color: var(--muted);
-    margin: 0.25rem 0 1.5rem;
+    margin: 0 0 1.75rem;
   }
 </style>

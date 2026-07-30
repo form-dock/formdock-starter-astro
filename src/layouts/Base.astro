@@ -24,7 +24,7 @@ const { title = SITE_NAME, description = SITE_TAGLINE } = Astro.props;
       <nav>
         <a href="/#work">Work</a>
         <a href="/#services">Services</a>
-        <a href="/contact" class="cta">Get in touch</a>
+        <a href="/contact" class="cta">Start a project</a>
       </nav>
     </header>
 
@@ -41,65 +41,87 @@ const { title = SITE_NAME, description = SITE_TAGLINE } = Astro.props;
 
 <style is:global>
   :root {
-    --bg: #ffffff;
-    --ink: #16161a;
-    --muted: #6b6b76;
-    --line: #e6e6ea;
-    --accent: #0f766e;
-    --accent-ink: #ffffff;
-    --panel: #f7f7f8;
+    --bg: #faf8f4;
+    --ink: #1f1b16;
+    --muted: #756c61;
+    --line: #e8e2d8;
+    --panel: #ffffff;
+    --panel-soft: #f3efe8;
+    --accent: #b4530a;
+    --accent-soft: #f6e3d3;
+    --accent-ink: #fdf9f4;
+    --shadow: 0 1px 2px rgb(31 27 22 / 0.04), 0 12px 32px -16px rgb(31 27 22 / 0.18);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --bg: #101014;
-      --ink: #ececf1;
-      --muted: #9a9aa5;
-      --line: #26262c;
-      --accent: #2dd4bf;
-      --accent-ink: #0c1211;
-      --panel: #17171c;
+      --bg: #161311;
+      --ink: #f0eae1;
+      --muted: #9c9287;
+      --line: #2d2823;
+      --panel: #1d1916;
+      --panel-soft: #221d19;
+      --accent: #e98a4b;
+      --accent-soft: #33241a;
+      --accent-ink: #1c120a;
+      --shadow: 0 1px 2px rgb(0 0 0 / 0.3), 0 12px 32px -16px rgb(0 0 0 / 0.55);
     }
   }
+
   * {
     box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
     margin: 0;
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--ink);
-    line-height: 1.6;
+    line-height: 1.65;
     display: flex;
     min-height: 100dvh;
     flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  .brand,
+  blockquote {
+    font-family: ui-serif, "Iowan Old Style", "Palatino Linotype", Palatino,
+      Georgia, serif;
+    font-weight: 600;
+    letter-spacing: -0.015em;
   }
   a {
     color: inherit;
   }
+
   .site-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 1rem;
-    max-width: 60rem;
+    max-width: 64rem;
     width: 100%;
     margin: 0 auto;
-    padding: 1.1rem 1.5rem;
+    padding: 1.25rem 1.5rem;
   }
   .brand {
-    font-weight: 700;
+    font-size: 1.15rem;
     text-decoration: none;
-    letter-spacing: -0.01em;
   }
   .site-header nav {
     display: flex;
-    gap: 1.1rem;
+    gap: 1.35rem;
     align-items: center;
     font-size: 0.95rem;
   }
   .site-header nav a {
     text-decoration: none;
     color: var(--muted);
+    transition: color 120ms ease;
   }
   .site-header nav a:hover {
     color: var(--ink);
@@ -107,22 +129,29 @@ const { title = SITE_NAME, description = SITE_TAGLINE } = Astro.props;
   .site-header nav a.cta {
     color: var(--accent-ink);
     background: var(--accent);
-    padding: 0.45rem 0.9rem;
-    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 999px;
     font-weight: 600;
+    transition: transform 120ms ease, filter 120ms ease;
   }
+  .site-header nav a.cta:hover {
+    filter: brightness(1.06);
+    transform: translateY(-1px);
+  }
+
   main {
     flex: 1;
     width: 100%;
-    max-width: 60rem;
+    max-width: 64rem;
     margin: 0 auto;
     padding: 0 1.5rem;
   }
+
   .site-footer {
     border-top: 1px solid var(--line);
-    margin-top: 4rem;
-    padding: 1.5rem;
-    max-width: 60rem;
+    margin-top: 5rem;
+    padding: 1.75rem 1.5rem;
+    max-width: 64rem;
     width: 100%;
     margin-inline: auto;
     display: flex;
@@ -134,5 +163,26 @@ const { title = SITE_NAME, description = SITE_TAGLINE } = Astro.props;
   }
   .site-footer a {
     color: var(--muted);
+  }
+
+  /* CSS-only scroll reveal — progressive enhancement, motion-safe */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .reveal {
+        animation: rise-in both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 55%;
+      }
+      @keyframes rise-in {
+        from {
+          opacity: 0;
+          transform: translateY(1.25rem);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+    }
   }
 </style>

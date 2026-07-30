@@ -6,28 +6,91 @@ import ContactForm from "../components/ContactForm.astro";
 <Base title="Contact" description="Tell us about your project.">
   <main>
     <section class="contact">
-      <h1>Get in touch</h1>
-      <p class="lede">
-        Tell us about your project — timeline, budget, and what success looks
-        like. We reply within one business day.
-      </p>
-      <ContactForm />
+      <div class="intro">
+        <p class="kicker">Contact</p>
+        <h1>Let&rsquo;s make something <em>good</em>.</h1>
+        <p class="lede">
+          Tell us about your project — timeline, budget, and what success
+          looks like. Straight answers, no account-manager theatre.
+        </p>
+        <dl class="facts">
+          <div>
+            <dt>Response time</dt>
+            <dd>Within one business day</dd>
+          </div>
+          <div>
+            <dt>Availability</dt>
+            <dd>Two project slots this autumn</dd>
+          </div>
+        </dl>
+      </div>
+      <div class="form-card">
+        <ContactForm />
+      </div>
     </section>
   </main>
 </Base>
 
 <style>
   .contact {
-    padding: 3.5rem 0 1rem;
+    padding: 4rem 0 1rem;
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
   }
-  .contact h1 {
-    font-size: 2rem;
-    letter-spacing: -0.02em;
-    margin: 0 0 0.5rem;
+  @media (min-width: 48rem) {
+    .contact {
+      grid-template-columns: 1fr 1.1fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+  }
+  .kicker {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 1rem;
+  }
+  h1 {
+    font-size: clamp(2rem, 4.5vw, 2.9rem);
+    line-height: 1.12;
+    margin: 0 0 1rem;
+  }
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
   }
   .lede {
     color: var(--muted);
-    max-width: 34rem;
+    max-width: 26rem;
     margin: 0 0 2rem;
+  }
+  .facts {
+    display: grid;
+    gap: 1.1rem;
+    margin: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 1.5rem;
+    max-width: 22rem;
+  }
+  .facts dt {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .facts dd {
+    margin: 0.15rem 0 0;
+    font-weight: 500;
+  }
+  .form-card {
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: 1.25rem;
+    padding: 1.75rem;
+    box-shadow: var(--shadow);
   }
 </style>

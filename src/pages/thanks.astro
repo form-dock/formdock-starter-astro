@@ -6,8 +6,8 @@ import Base from "../layouts/Base.astro";
   <main>
     <section class="thanks">
       <div class="check">✓</div>
-      <h1>Thanks — your message was sent.</h1>
-      <p>We'll get back to you within one business day.</p>
+      <h1>Message received.</h1>
+      <p>We&rsquo;ll get back to you within one business day.</p>
       <a href="/">← Back to the site</a>
     </section>
   </main>
@@ -16,17 +16,33 @@ import Base from "../layouts/Base.astro";
 <style>
   .thanks {
     text-align: center;
-    padding: 6rem 0;
+    padding: 7rem 0;
   }
   .check {
-    font-size: 2.5rem;
+    width: 3.25rem;
+    height: 3.25rem;
+    margin: 0 auto 1.25rem;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    background: var(--accent-soft);
     color: var(--accent);
+    font-size: 1.5rem;
+    font-weight: 700;
   }
   .thanks h1 {
-    font-size: 1.6rem;
-    margin: 0.5rem 0;
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
   }
   .thanks p {
     color: var(--muted);
+    margin: 0 0 1.75rem;
+  }
+  .thanks a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .thanks a:hover {
+    color: var(--ink);
   }
 </style>
